@@ -19,3 +19,15 @@
 /* Dark-mode */
 [data-theme='dark'] {
 }
+
+/* Tailwind */
+@theme inline {
+  --color-page: var(--bg-page);
+  --color-on-page: var(--text-page);
+  --color-brand: var(--bg-brand);
+  --color-on-brand: var(--text-brand);
+  --color-input: var(--bg-input);
+  --color-on-input: var(--text-input);
+  --color-button: var(--bg-button);
+  --color-on-button: var(--text-button);
+}
