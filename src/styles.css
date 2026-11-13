@@ -22,6 +22,8 @@
 
 /* Tailwind */
 @theme inline {
+  --default-font-family: 'JetBrains Mono', monospace;
+
   --color-page: var(--bg-page);
   --color-on-page: var(--text-page);
   --color-brand: var(--bg-brand);
