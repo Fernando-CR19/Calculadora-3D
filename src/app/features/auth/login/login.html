@@ -4,7 +4,50 @@
     <h1 class="text-xl">Calculadora 3D Geek Shop</h1>
     <p class="text-xs italic">Calculadora de Custos de Impressão 3D</p>
   </header>
-  <section class="flex flex-col items-center">
-    <form (ngSubmit)="onSubmit()"></form>
+  <section class="flex flex-col mt-6">
+    <form (submit)="onSubmit(); $event.preventDefault()" class="flex flex-col gap-6">
+      <div class="flex flex-col">
+        <label for="nome-usuario">Nome de usuário: </label>
+        <input
+          [formField]="loginForm.nomeUsuario"
+          type="text"
+          id="nome-usuario"
+          class="border border-on-page rounded-lg p-1 bg-input text-on-input"
+          autocomplete="username"
+          autocapitalize="none"
+          autocorrect="off"
+          spellcheck="false"
+        />
+        @if (loginForm.nomeUsuario().touched() && loginForm.nomeUsuario().invalid()) {
+          @for (error of loginForm.nomeUsuario().errors(); track error.kind) {
+            <span class="text-error">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <div class="flex flex-col">
+        <label for="senha-usuario">Senha: </label>
+        <input
+          [formField]="loginForm.senha"
+          type="password"
+          id="senha-usuario"
+          class="border border-on-page rounded-lg p-1 bg-input text-on-input"
+          autocomplete="current-password"
+        />
+        @if (loginForm.senha().touched() && loginForm.senha().invalid()) {
+          @for (error of loginForm.senha().errors(); track error.kind) {
+            <span class="text-error">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <button type="submit" class="rounded-lg bg-button text-on-button p-1 cursor-pointer mt-5">
+        Entrar
+      </button>
+    </form>
+
+    <p class="text-right mt-6 text-sm">
+      Não tem uma conta? <a routerLink="/cadastro" class="text-link underline">Cadastre-se</a>
+    </p>
   </section>
 </main>

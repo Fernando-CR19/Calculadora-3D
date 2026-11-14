@@ -4,16 +4,23 @@
 :root {
   --black: #1f1f1f;
   --white: #ffffff;
+  --red-light: #ed535a;
+  --red: #c62828;
+  --blue-light: #029bd6;
+  --blue: #0277a8;
 
   /* Tokens semânticos */
   --bg-page: var(--white);
   --text-page: var(--black);
   --bg-brand: var(--black);
   --text-brand: var(--white);
-  --bg-input: var(--white);
-  --text-input: var(--black);
+  --bg-input: var(--black);
+  --text-input: var(--white);
   --bg-button: var(--black);
   --text-button: var(--white);
+  --text-error: var(--red);
+  --text-info: var(--blue);
+  --text-link: var(--blue);
 }
 
 /* Dark-mode */
@@ -32,4 +39,7 @@
   --color-on-input: var(--text-input);
   --color-button: var(--bg-button);
   --color-on-button: var(--text-button);
+  --color-error: var(--text-error);
+  --color-info: var(--text-info);
+  --color-link: var(--text-link);
 }
