@@ -25,6 +25,14 @@
 
 /* Dark-mode */
 [data-theme='dark'] {
+  --bg-page: var(--black);
+  --text-page: var(--white);
+  --bg-input: var(--white);
+  --text-input: var(--black);
+  --bg-button: var(--white);
+  --text-button: var(--black);
+  --text-error: var(--red-light);
+  --text-link: var(--blue-light);
 }
 
 /* Tailwind */
