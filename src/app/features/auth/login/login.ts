@@ -8,19 +8,19 @@ import { RouterLink } from '@angular/router';
   templateUrl: './login.html',
 })
 export class Login {
-  protected readonly anoAtual: number = new Date().getFullYear();
+  protected readonly anoAtual = new Date().getFullYear();
 
-  loginModel = signal({
+  private readonly loginModel = signal({
     nomeUsuario: '',
     senha: '',
   });
 
-  loginForm = form(this.loginModel, (path) => {
+  protected readonly loginForm = form(this.loginModel, (path) => {
     required(path.nomeUsuario, { message: 'Nome de usuário é obrigatório.' });
     required(path.senha, { message: 'Senha é obrigatória.' });
   });
 
-  onSubmit() {
+  protected onSubmit() {
     if (this.loginForm().valid()) {
       const payload = this.loginModel();
       console.log('payload enviado: ', payload);
