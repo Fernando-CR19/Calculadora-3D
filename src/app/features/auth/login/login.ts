@@ -8,6 +8,8 @@ import { RouterLink } from '@angular/router';
   templateUrl: './login.html',
 })
 export class Login {
+  protected readonly anoAtual: number = new Date().getFullYear();
+
   loginModel = signal({
     nomeUsuario: '',
     senha: '',
