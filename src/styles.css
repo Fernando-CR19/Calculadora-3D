@@ -27,11 +27,14 @@
 [data-theme='dark'] {
   --bg-page: var(--black);
   --text-page: var(--white);
+  --bg-brand: var(--white);
+  --text-brand: var(--black);
   --bg-input: var(--white);
   --text-input: var(--black);
   --bg-button: var(--white);
   --text-button: var(--black);
   --text-error: var(--red-light);
+  --text-info: var(--blue-light);
   --text-link: var(--blue-light);
 }
 
