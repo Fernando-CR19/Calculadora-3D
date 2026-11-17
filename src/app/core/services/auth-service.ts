@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { LoginRequestDto, LoginResponseDto } from '../../shared/interfaces';
 
@@ -28,10 +28,12 @@ export class AuthService {
       return of(false);
     }
 
-    return this.http.get(`${AuthService.API_URL}/auth/profile`).pipe(
+    return this.http.get(`${AuthService.API_URL}/usuarios/perfil`).pipe(
       map(() => true),
-      catchError(() => {
-        this.removeToken();
+      catchError((errorResponse: HttpErrorResponse) => {
+        if (errorResponse.status === 401) {
+          this.removeToken();
+        }
         return of(false);
       }),
     );
