@@ -1,6 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth-service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorDefaultResponse } from '../../../shared/interfaces';
 
 @Component({
   imports: [FormField, RouterLink],
@@ -9,6 +12,11 @@ import { RouterLink } from '@angular/router';
 })
 export class Login {
   protected readonly anoAtual = new Date().getFullYear();
+
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   private readonly loginModel = signal({
     nomeUsuario: '',
@@ -23,7 +31,15 @@ export class Login {
   protected onSubmit() {
     if (this.loginForm().valid()) {
       const payload = this.loginModel();
-      console.log('payload enviado: ', payload);
+      this.authService.authenticate(payload).subscribe({
+        next: () => {
+          this.router.navigate(['/app']);
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          const apiError: ErrorDefaultResponse = errorResponse.error;
+          console.log('Erro ao fazer o login: ', apiError);
+        },
+      });
     }
   }
 }
