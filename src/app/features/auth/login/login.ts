@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service';
@@ -11,7 +11,8 @@ import { ErrorDefaultResponse } from '../../../shared/interfaces';
   templateUrl: './login.html',
 })
 export class Login {
-  protected readonly anoAtual = new Date().getFullYear();
+  protected readonly anoAtual: number = new Date().getFullYear();
+  protected readonly errorMessage: WritableSignal<string> = signal('');
 
   constructor(
     private readonly authService: AuthService,
@@ -30,14 +31,24 @@ export class Login {
 
   protected onSubmit() {
     if (this.loginForm().valid()) {
+      this.errorMessage.set('');
+
       const payload = this.loginModel();
       this.authService.authenticate(payload).subscribe({
         next: () => {
           this.router.navigate(['/app']);
         },
         error: (errorResponse: HttpErrorResponse) => {
+          if (errorResponse.status === 0 || errorResponse.error instanceof Error) {
+            this.errorMessage.set(
+              'Não foi possível estabelecer uma conexão com o servidor. Tente novamente mais tarde.',
+            );
+            return;
+          }
+
           const apiError: ErrorDefaultResponse = errorResponse.error;
-          console.log('Erro ao fazer o login: ', apiError);
+          const message = apiError?.message || 'Erro inesperado ao fazer login.';
+          this.errorMessage.set(message);
         },
       });
     }
