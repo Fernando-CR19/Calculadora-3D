@@ -1,0 +1,101 @@
+<main class="flex flex-col bg-page text-on-page min-h-dvh p-4">
+  <header class="flex flex-col items-center">
+    <img
+      src="/logo-tema-claro.png"
+      alt="3D Geek Shop"
+      class="hidden lg:block size-48 object-contain"
+    />
+    <h2 class="hidden lg:block text-xl">Calculadora 3D Geek Shop</h2>
+    <p class="hidden lg:block text-xs italic">Calculadora de Custos de Impressão 3D</p>
+  </header>
+  <section class="flex flex-col mt-6">
+    <h1 class="text-2xl text-center mb-6 uppercase">Cadastre-se</h1>
+
+    <form (submit)="onSubmit(); $event.preventDefault()" class="flex flex-col gap-6">
+      <div class="flex flex-col">
+        <label for="nome">Nome: </label>
+        <input
+          [formField]="cadastroForm.nome"
+          type="text"
+          id="nome"
+          class="border border-on-page rounded-lg p-1 bg-input text-on-input"
+          autocomplete="name"
+          autocapitalize="words"
+          autocorrect="off"
+          spellcheck="false"
+        />
+        @if (cadastroForm.nome().touched() && cadastroForm.nome().invalid()) {
+          @for (error of cadastroForm.nome().errors(); track error.kind) {
+            <span class="text-error">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <div class="flex flex-col">
+        <label for="nome-usuario">Nome de usuário: </label>
+        <input
+          [formField]="cadastroForm.nomeUsuario"
+          type="text"
+          id="nome-usuario"
+          class="border border-on-page rounded-lg p-1 bg-input text-on-input"
+          autocomplete="username"
+          autocapitalize="none"
+          autocorrect="off"
+          spellcheck="false"
+        />
+        @if (cadastroForm.nomeUsuario().touched() && cadastroForm.nomeUsuario().invalid()) {
+          @for (error of cadastroForm.nomeUsuario().errors(); track error.kind) {
+            <span class="text-error">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <div class="flex flex-col">
+        <label for="senha-usuario">Senha: </label>
+        <input
+          [formField]="cadastroForm.senha"
+          type="password"
+          id="senha-usuario"
+          class="border border-on-page rounded-lg p-1 bg-input text-on-input"
+          autocomplete="new-password"
+        />
+        @if (cadastroForm.senha().touched() && cadastroForm.senha().invalid()) {
+          @for (error of cadastroForm.senha().errors(); track error.kind) {
+            <span class="text-error">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <div class="flex flex-col">
+        <label for="confirmar-senha-usuario">Confirmar senha: </label>
+        <input
+          [formField]="cadastroForm.confirmarSenha"
+          type="password"
+          id="confirmar-senha-usuario"
+          class="border border-on-page rounded-lg p-1 bg-input text-on-input"
+          autocomplete="new-password"
+        />
+        @if (cadastroForm.confirmarSenha().touched() && cadastroForm.confirmarSenha().invalid()) {
+          @for (error of cadastroForm.confirmarSenha().errors(); track error.kind) {
+            <span class="text-error">{{ error.message }}</span>
+          }
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="rounded-lg bg-button text-on-button p-1 cursor-pointer mt-5 lg:self-end lg:px-10"
+      >
+        Criar conta
+      </button>
+    </form>
+
+    <p class="text-right mt-6 text-sm">
+      Já tem uma conta? <a routerLink="/login" class="text-link underline">Faça o login</a>
+    </p>
+  </section>
+
+  <footer class="text-xs mt-auto text-center">
+    <p>© {{ anoAtual }} 3D Geek Shop.</p>
+  </footer>
+</main>
