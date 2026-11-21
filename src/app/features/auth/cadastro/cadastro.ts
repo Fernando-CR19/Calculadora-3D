@@ -31,16 +31,16 @@ export class Cadastro {
     required(path.senha, { message: 'Senha é obrigatória.' });
     required(path.confirmarSenha, { message: 'Por favor, confirme sua senha.' });
 
-    minLength(path.nome, 2, { message: 'O nome precisa ter mais de uma letra.' });
-    maxLength(path.nome, 100, { message: 'Nome máximo de 100 caracteres.' });
+    minLength(path.nome, 2, { message: 'O nome deve ter no mínimo 2 caracteres.' });
+    maxLength(path.nome, 100, { message: 'O nome deve ter no máximo 100 caracteres.' });
 
     pattern(path.nomeUsuario, /^[a-zA-Z0-9.\-_]{3,20}$/, {
       message:
         'O nome de usuário deve ter entre 3 e 20 caracteres e conter apenas letras, números, hífen, ponto ou underline.',
     });
 
-    minLength(path.senha, 8, { message: 'A senha deve conter no mínimo 8 caracteres.' });
-    maxLength(path.senha, 72, { message: 'A senha deve conter no máximo 72 caracteres.' });
+    minLength(path.senha, 8, { message: 'A senha deve ter no mínimo 8 caracteres.' });
+    maxLength(path.senha, 72, { message: 'A senha deve ter no máximo 72 caracteres.' });
 
     validate(path.confirmarSenha, ({ value, valueOf }) => {
       const confirmarSenha = value();
