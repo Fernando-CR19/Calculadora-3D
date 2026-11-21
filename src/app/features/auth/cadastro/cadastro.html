@@ -1,17 +1,26 @@
-<main class="flex flex-col bg-page text-on-page min-h-dvh p-4">
-  <header class="flex flex-col items-center">
+<main
+  class="flex flex-col bg-page text-on-page min-h-dvh p-4 lg:grid lg:grid-cols-2 lg:grid-rows-[1fr_auto] lg:p-0"
+>
+  <header
+    class="flex flex-col items-center lg:bg-brand lg:text-on-brand lg:items-end lg:px-4 lg:text-right lg:text-balance lg:row-start-1 lg:col-start-2 lg:[view-transition-name:marca]"
+  >
     <img
       src="/logo-tema-claro.png"
       alt="3D Geek Shop"
       class="hidden lg:block size-48 object-contain"
     />
-    <h2 class="hidden lg:block text-xl">Calculadora 3D Geek Shop</h2>
-    <p class="hidden lg:block text-xs italic">Calculadora de Custos de Impressão 3D</p>
+    <h2 class="hidden lg:block text-6xl">Calculadora 3D Geek Shop</h2>
+    <p class="hidden lg:block italic mt-6 text-2xl pr-1">Calculadora de Custos de Impressão 3D</p>
   </header>
-  <section class="flex flex-col mt-6">
-    <h1 class="text-2xl text-center mb-6 uppercase">Cadastre-se</h1>
+  <section
+    class="flex flex-col mt-6 lg:row-start-1 lg:col-start-1 lg:mt-0 lg:items-center lg:pt-48 lg:px-4 lg:row-span-2"
+  >
+    <h1 class="text-2xl text-center mb-6 uppercase lg:sr-only">Cadastre-se</h1>
 
-    <form (submit)="onSubmit(); $event.preventDefault()" class="flex flex-col gap-6">
+    <form
+      (submit)="onSubmit(); $event.preventDefault()"
+      class="flex flex-col gap-6 lg:w-full lg:max-w-4xl lg:text-xl"
+    >
       <div class="flex flex-col">
         <label for="nome">Nome: </label>
         <input
@@ -90,12 +99,14 @@
       </button>
     </form>
 
-    <p class="text-right mt-6 text-sm">
+    <p class="text-right mt-6 text-sm lg:w-full lg:max-w-4xl lg:text-xl">
       Já tem uma conta? <a routerLink="/login" class="text-link underline">Faça o login</a>
     </p>
   </section>
 
-  <footer class="text-xs mt-auto text-center">
+  <footer
+    class="text-xs mt-auto text-center lg:bg-brand lg:text-on-brand lg:text-right lg:text-xl lg:px-4 lg:row-start-2 lg:col-start-2 lg:[view-transition-name:rodape]"
+  >
     <p>© {{ anoAtual }} 3D Geek Shop.</p>
   </footer>
 </main>
