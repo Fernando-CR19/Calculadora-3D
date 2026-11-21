@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
 import {
   form,
   FormField,
@@ -8,7 +8,10 @@ import {
   required,
   validate,
 } from '@angular/forms/signals';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth-service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorDefaultResponse } from '../../../shared/interfaces';
 
 @Component({
   imports: [FormField, RouterLink],
@@ -17,6 +20,12 @@ import { RouterLink } from '@angular/router';
 })
 export class Cadastro {
   protected readonly anoAtual: number = new Date().getFullYear();
+  protected readonly errorMessage: WritableSignal<string> = signal('');
+
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   private readonly cadastroModel = signal({
     nome: '',
@@ -62,6 +71,29 @@ export class Cadastro {
   });
 
   protected onSubmit() {
-    console.log('Payload enviado');
+    if (this.cadastroForm().valid()) {
+      this.errorMessage.set('');
+
+      const { confirmarSenha, ...payload } = this.cadastroModel();
+      this.authService.register(payload).subscribe({
+        next: () => {
+          this.router.navigate(['/login'], {
+            state: { successMessage: 'Cadastro realizado com sucesso, pode fazer o login.' },
+          });
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          if (errorResponse.status === 0 || errorResponse.error instanceof Error) {
+            this.errorMessage.set(
+              'Não foi possível estabelecer uma conexão com o servidor. Tente novamente mais tarde.',
+            );
+            return;
+          }
+
+          const apiError: ErrorDefaultResponse = errorResponse.error;
+          const message = apiError?.message || 'Erro inesperado ao fazer o cadastro.';
+          this.errorMessage.set(message);
+        },
+      });
+    }
   }
 }

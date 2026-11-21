@@ -9,6 +9,10 @@
     <p class="text-xs italic lg:mt-6 lg:text-2xl">Calculadora de Custos de Impressão 3D</p>
   </header>
   <section class="flex flex-col mt-6 lg:mt-0 lg:items-center lg:pt-48 lg:px-4 lg:row-span-2">
+    @if (successMessage()) {
+      <div role="status" class="text-info mb-2 lg:w-full lg:max-w-4xl">{{ successMessage() }}</div>
+    }
+
     <form
       (submit)="onSubmit(); $event.preventDefault()"
       class="flex flex-col gap-6 lg:w-full lg:max-w-4xl lg:text-xl"

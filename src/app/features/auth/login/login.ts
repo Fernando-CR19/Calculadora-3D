@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, effect, signal, WritableSignal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service';
@@ -13,11 +13,26 @@ import { ErrorDefaultResponse } from '../../../shared/interfaces';
 export class Login {
   protected readonly anoAtual: number = new Date().getFullYear();
   protected readonly errorMessage: WritableSignal<string> = signal('');
+  protected readonly successMessage: WritableSignal<string> = signal('');
 
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
-  ) {}
+  ) {
+    const message =
+      (this.router.currentNavigation()?.extras.state?.['successMessage'] as string) ?? '';
+    this.successMessage.set(message);
+
+    effect((onCleanup) => {
+      if (this.successMessage()) {
+        const timeoutId = setTimeout(() => {
+          this.successMessage.set('');
+        }, 4000);
+
+        onCleanup(() => clearTimeout(timeoutId));
+      }
+    });
+  }
 
   private readonly loginModel = signal({
     nomeUsuario: '',
@@ -31,6 +46,7 @@ export class Login {
 
   protected onSubmit() {
     if (this.loginForm().valid()) {
+      this.successMessage.set('');
       this.errorMessage.set('');
 
       const payload = this.loginModel();

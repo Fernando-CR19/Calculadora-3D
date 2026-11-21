@@ -97,6 +97,12 @@
       >
         Criar conta
       </button>
+
+      @if (errorMessage()) {
+        <span role="alert" class="text-error text-center text-balance lg:text-right">
+          {{ errorMessage() }}
+        </span>
+      }
     </form>
 
     <p class="text-right mt-6 text-sm lg:w-full lg:max-w-4xl lg:text-xl">
