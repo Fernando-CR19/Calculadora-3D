@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of, tap } from 'rxjs';
-import { LoginRequestDto, LoginResponseDto } from '../../shared/interfaces';
+import {
+  CadastroRequestDto,
+  UsuarioResponseDto,
+  LoginRequestDto,
+  LoginResponseDto,
+} from '../../shared/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -19,6 +24,13 @@ export class AuthService {
           sessionStorage.setItem(AuthService.TOKEN_KEY, response.token);
         }),
       );
+  }
+
+  register(cadastroRequestDto: CadastroRequestDto): Observable<UsuarioResponseDto> {
+    return this.http.post<UsuarioResponseDto>(
+      `${AuthService.API_URL}/auth/cadastro`,
+      cadastroRequestDto,
+    );
   }
 
   isAuthenticated(): Observable<boolean> {
