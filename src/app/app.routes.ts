@@ -17,7 +17,10 @@ export const routes: Routes = [
   },
   {
     path: 'app',
-    loadComponent: () => import('./features/home/home').then((m) => m.Home),
+    loadComponent: () => import('./core/layout/shell/shell').then((m) => m.Shell),
     canActivate: [authGuard],
+    children: [
+      { path: '', loadComponent: () => import('./features/home/home').then((m) => m.Home) },
+    ],
   },
 ];
