@@ -1,4 +1,26 @@
-<header>Header</header>
+<header class="bg-brand text-on-brand p-2 flex justify-between items-center">
+  <button type="button" aria-label="Abrir aba lateral" class="cursor-pointer flex items-center p-2">
+    <ng-icon name="matMenuOutline" size="28"></ng-icon>
+  </button>
+
+  <div class="flex gap-2">
+    <button
+      type="button"
+      aria-label="Mudar tema do site"
+      class="cursor-pointer flex items-center p-2"
+    >
+      <ng-icon name="matLightModeOutline" size="28"></ng-icon>
+    </button>
+
+    <button
+      type="button"
+      aria-label="Abrir informações do usuário"
+      class="cursor-pointer flex items-center p-2"
+    >
+      <ng-icon name="matAccountCircleOutline" size="28"></ng-icon>
+    </button>
+  </div>
+</header>
 <main>
   <router-outlet></router-outlet>
 </main>
