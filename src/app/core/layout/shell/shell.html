@@ -16,9 +16,23 @@
       type="button"
       aria-label="Abrir informações do usuário"
       class="cursor-pointer flex items-center p-2"
+      [cdkMenuTriggerFor]="menu"
     >
       <ng-icon name="matAccountCircleOutline" size="28"></ng-icon>
     </button>
+
+    <ng-template #menu>
+      <div cdkMenu class="border border-on-brand rounded-lg bg-brand text-on-brand overflow-hidden">
+        <button
+          type="button"
+          class="p-2 cursor-pointer hover:bg-on-brand hover:text-brand focus-visible:bg-on-brand focus-visible:text-brand focus-visible:outline-none"
+          cdkMenuItem
+          (cdkMenuItemTriggered)="logout()"
+        >
+          Sair da conta
+        </button>
+      </div>
+    </ng-template>
   </div>
 </header>
 <main>
