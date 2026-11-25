@@ -14,6 +14,7 @@
   --text-page: var(--black);
   --bg-brand: var(--black);
   --text-brand: var(--white);
+  --bg-overlay: var(--black);
   --bg-input: var(--black);
   --text-input: var(--white);
   --bg-button: var(--black);
@@ -46,6 +47,7 @@
   --color-on-page: var(--text-page);
   --color-brand: var(--bg-brand);
   --color-on-brand: var(--text-brand);
+  --color-overlay: var(--bg-overlay);
   --color-input: var(--bg-input);
   --color-on-input: var(--text-input);
   --color-button: var(--bg-button);
