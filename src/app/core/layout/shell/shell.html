@@ -3,7 +3,7 @@
     #menuButton
     type="button"
     aria-label="Abrir aba lateral"
-    class="cursor-pointer flex items-center p-2"
+    class="cursor-pointer flex items-center p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
     [attr.aria-expanded]="isMenuOpen()"
     (click)="toggleMenuState()"
   >
@@ -14,7 +14,7 @@
     <button
       type="button"
       aria-label="Mudar tema do site"
-      class="cursor-pointer flex items-center p-2"
+      class="cursor-pointer flex items-center p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
     >
       <ng-icon name="matLightModeOutline" size="28"></ng-icon>
     </button>
@@ -22,7 +22,7 @@
     <button
       type="button"
       aria-label="Abrir informações do usuário"
-      class="cursor-pointer flex items-center p-2"
+      class="cursor-pointer flex items-center p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
       [cdkMenuTriggerFor]="account"
     >
       <ng-icon name="matAccountCircleOutline" size="28"></ng-icon>
@@ -62,8 +62,8 @@
     <button
       type="button"
       aria-label="Fechar aba lateral"
-      class="cursor-pointer p-1"
-      (click)="closeMenu()"
+      class="cursor-pointer p-2 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
+      (click)="closeMenuAndRestoreFocus()"
     >
       <ng-icon name="matCloseOutline" size="28"></ng-icon>
     </button>

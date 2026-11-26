@@ -26,12 +26,12 @@ import { AuthService } from '../../services/auth-service';
     provideIcons({ matMenuOutline, matLightModeOutline, matAccountCircleOutline, matCloseOutline }),
   ],
   host: {
-    '(document:keydown.escape)': 'onEscapeKey()',
+    '(document:keydown.escape)': 'closeMenuAndRestoreFocus()',
   },
 })
 export class Shell {
   protected readonly isMenuOpen = signal(false);
-  protected readonly menuButton = viewChild<ElementRef<HTMLButtonElement>>('menuButton');
+  private readonly menuButton = viewChild<ElementRef<HTMLButtonElement>>('menuButton');
 
   constructor(
     private readonly authService: AuthService,
@@ -46,7 +46,7 @@ export class Shell {
     this.isMenuOpen.set(false);
   }
 
-  protected onEscapeKey(): void {
+  protected closeMenuAndRestoreFocus(): void {
     if (!this.isMenuOpen()) return;
 
     this.closeMenu();
