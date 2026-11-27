@@ -1,32 +1,22 @@
 <header class="bg-brand text-on-brand p-2 flex justify-between items-center">
   <button
     #menuButton
-    type="button"
+    app-icon-button
+    icon="matMenuOutline"
     aria-label="Abrir aba lateral"
-    class="cursor-pointer flex items-center p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
     [attr.aria-expanded]="isMenuOpen()"
     (click)="toggleMenuState()"
-  >
-    <ng-icon name="matMenuOutline" size="28"></ng-icon>
-  </button>
+  ></button>
 
   <div class="flex gap-2">
-    <button
-      type="button"
-      aria-label="Mudar tema do site"
-      class="cursor-pointer flex items-center p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
-    >
-      <ng-icon name="matLightModeOutline" size="28"></ng-icon>
-    </button>
+    <button app-icon-button icon="matLightModeOutline" aria-label="Mudar tema do site"></button>
 
     <button
-      type="button"
+      app-icon-button
+      icon="matAccountCircleOutline"
       aria-label="Abrir informações do usuário"
-      class="cursor-pointer flex items-center p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
       [cdkMenuTriggerFor]="account"
-    >
-      <ng-icon name="matAccountCircleOutline" size="28"></ng-icon>
-    </button>
+    ></button>
 
     <ng-template #account>
       <div cdkMenu class="border border-on-brand rounded-lg bg-brand text-on-brand overflow-hidden">
@@ -60,13 +50,11 @@
 >
   <div class="flex justify-end mb-4">
     <button
-      type="button"
+      app-icon-button
+      icon="matCloseOutline"
       aria-label="Fechar aba lateral"
-      class="cursor-pointer p-2 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
       (click)="closeMenuAndRestoreFocus()"
-    >
-      <ng-icon name="matCloseOutline" size="28"></ng-icon>
-    </button>
+    ></button>
   </div>
 
   <ul class="space-y-4">

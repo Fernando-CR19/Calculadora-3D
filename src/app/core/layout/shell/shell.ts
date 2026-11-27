@@ -1,6 +1,6 @@
 import { Component, ElementRef, signal, viewChild } from '@angular/core';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import {
   matMenuOutline,
   matLightModeOutline,
@@ -9,16 +9,17 @@ import {
 } from '@ng-icons/material-symbols/outline';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { AuthService } from '../../services/auth-service';
+import { IconButton } from '../../../shared/components/icon-button';
 
 @Component({
   imports: [
     RouterOutlet,
-    NgIcon,
     CdkMenu,
     CdkMenuItem,
     CdkMenuTrigger,
     RouterLink,
     RouterLinkActive,
+    IconButton,
   ],
   selector: 'app-shell',
   templateUrl: './shell.html',
@@ -31,7 +32,9 @@ import { AuthService } from '../../services/auth-service';
 })
 export class Shell {
   protected readonly isMenuOpen = signal(false);
-  private readonly menuButton = viewChild<ElementRef<HTMLButtonElement>>('menuButton');
+  private readonly menuButton = viewChild('menuButton', {
+    read: ElementRef<HTMLButtonElement>,
+  });
 
   constructor(
     private readonly authService: AuthService,
